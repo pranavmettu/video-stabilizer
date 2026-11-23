@@ -15,6 +15,7 @@ find_package(OpenCV REQUIRED)
 # As we add files (feature_tracker.cpp, ...), we list them here.
 add_executable(stabilize
     src/main.cpp
+    src/feature_tracker.cpp
 )
 
 target_include_directories(stabilize PRIVATE ${OpenCV_INCLUDE_DIRS})
