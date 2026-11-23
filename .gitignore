@@ -14,3 +14,5 @@ results/*
 
 # macOS
 .DS_Store
+
+.cache/
