@@ -16,6 +16,7 @@ find_package(OpenCV REQUIRED)
 add_executable(stabilize
     src/main.cpp
     src/feature_tracker.cpp
+    src/motion_estimator.cpp
 )
 
 target_include_directories(stabilize PRIVATE ${OpenCV_INCLUDE_DIRS})
