@@ -14,6 +14,12 @@ struct Motion {
     bool valid = false;  // false if we could not estimate (too few points, etc.)
 };
 
+// The fit above rotates about the image's top-left corner (0, 0), so dx and dy
+// secretly include part of the rotation. This re-expresses the same motion as a
+// rotation about (cx, cy) plus a slide, which is how frame_warper applies it.
+// Pass the frame center. da and scale are unchanged.
+Motion motion_about_point(const Motion& m, double cx, double cy);
+
 class MotionEstimator {
 public:
     // Fits a similarity transform (slide + rotate + zoom) to the point pairs.

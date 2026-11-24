@@ -17,6 +17,9 @@ add_executable(stabilize
     src/main.cpp
     src/feature_tracker.cpp
     src/motion_estimator.cpp
+    src/trajectory.cpp
+    src/frame_warper.cpp
+    src/metrics.cpp
 )
 
 target_include_directories(stabilize PRIVATE ${OpenCV_INCLUDE_DIRS})

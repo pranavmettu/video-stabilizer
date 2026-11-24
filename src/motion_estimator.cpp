@@ -6,6 +6,20 @@
 
 #include <opencv2/geometry.hpp>  // estimateAffinePartial2D (OpenCV 5 location)
 
+Motion motion_about_point(const Motion& m, double cx, double cy) {
+    // The fit says p' = A*p + t, where A = scale * [cos -sin; sin cos] is the
+    // rotate-and-zoom part (about the origin).
+    // Write p = center + q. Then p' = center + A*q + (t + (A - I)*center),
+    // so acting about the center needs the slide t + (A - I)*center.
+    const double a = m.scale * std::cos(m.da);  // = m00
+    const double b = m.scale * std::sin(m.da);  // = m10
+
+    Motion result = m;
+    result.dx = m.dx + (a - 1.0) * cx - b * cy;
+    result.dy = m.dy + b * cx + (a - 1.0) * cy;
+    return result;
+}
+
 Motion MotionEstimator::estimate(const TrackedPoints& points) const {
     Motion motion;  // starts as "no motion, not valid"
 
